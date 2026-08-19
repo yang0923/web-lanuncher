@@ -8,6 +8,8 @@ Web Launcher 是一款专为 ZTools 设计的插件，帮助你快速启动网�
 
 本项目基于 `ZToolsCenter` 插件仓库开发，灵感来源于原 [web-quick-open](https://github.com/ZToolsCenter/ZTools-plugins/tree/main/plugins/web-quick-open) 插件，但在功能与交互上进行了全面重构与增强。
 
+> 主要因为原插件启动网页的时候会有几秒钟的延迟，且在标签管理和搜索功能上存在一些局限性，因此本项目旨在提供更流畅的体验和更丰富的功能。
+
 # ✨ 功能特性
 
 ## 🚀 核心功能
