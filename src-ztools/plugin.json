@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "main": "dist/index.html",
   "preload": "preload/index.js",
-  "logo": "logo.png",
+  "logo": "logo.svg",
   "development": {
     "main": "http://localhost:5173"
   },
