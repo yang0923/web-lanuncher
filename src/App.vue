@@ -225,34 +225,30 @@ const searchInputRef = ref<HTMLInputElement | null>(null);
 // ============================================================
 // 计算属性
 // ============================================================
+const typeFilteredItems = computed(() => {
+  const type = typeFilter.value;
+  if (type === "webpage") return items.value.filter((i) => !i.isSearch);
+  if (type === "search") return items.value.filter((i) => i.isSearch);
+  return items.value;
+});
 
 const uncategorizedCount = computed(
-  () => items.value.filter((item) => item.tagIds.length === 0).length,
+  () =>
+    typeFilteredItems.value.filter((item) => item.tagIds.length === 0).length,
 );
 
-// ✅ 统一的筛选逻辑
+function getTagItemCount(tagId: string): number {
+  return typeFilteredItems.value.filter((item) => item.tagIds.includes(tagId))
+    .length;
+}
+
+// ✅ 视图层：最终渲染列表，在 typeFilteredItems 基础上叠加搜索与标签状态
 const filteredItems = computed(() => {
   const hasTagFilter = selectedTagIds.value.length > 0;
   const isUncat = showUncategorized.value && selectedTagIds.value.length === 0;
   const q = searchQuery.value.trim().toLowerCase();
-  const type = typeFilter.value;
-  console.log(
-    "[WebLauncher] 筛选条件",
-    "type:",
-    type,
-    "tags:",
-    selectedTagIds.value,
-    "uncat:",
-    showUncategorized.value,
-    "search:",
-    q,
-  );
 
-  return items.value.filter((item) => {
-    // 类型筛选
-    if (type === "webpage" && item.isSearch) return false;
-    if (type === "search" && !item.isSearch) return false;
-
+  return typeFilteredItems.value.filter((item) => {
     // 标签筛选
     if (hasTagFilter) {
       if (!selectedTagIds.value.every((tagId) => item.tagIds.includes(tagId)))
@@ -279,15 +275,6 @@ const filteredItems = computed(() => {
 
 function getTagName(id: string): string {
   return tags.value.find((t) => t.id === id)?.name || id;
-}
-
-function getTagItemCount(tagId: string): number {
-  const filtered = items.value.filter((item) => {
-    if (typeFilter.value === "webpage" && item.isSearch) return false;
-    if (typeFilter.value === "search" && !item.isSearch) return false;
-    return true;
-  });
-  return filtered.filter((item) => item.tagIds.includes(tagId)).length;
 }
 
 // ============================================================

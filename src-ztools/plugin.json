@@ -4,7 +4,7 @@
   "title": "Web Launcher",
   "description": "快速启动网页和搜索",
   "author": "yy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.html",
   "preload": "preload/index.js",
   "logo": "logo.svg",
