@@ -15,7 +15,7 @@
     {
       "code": "web-launcher",
       "explain": "打开 Web Launcher 管理界面",
-      "icon": "logo.png",
+      "icon": "logo.svg",
       "cmds": ["Web Launcher", "web"]
     }
   ],
